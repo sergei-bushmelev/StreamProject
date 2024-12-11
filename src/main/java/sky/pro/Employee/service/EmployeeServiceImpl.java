@@ -8,13 +8,12 @@ import sky.pro.Employee.model.Employee;
 import java.util.*;
 
 @Service
-public class EmployeeServiceImpl implements EmployeeService {
+public class EmployeeServiceImpl {
 
     private final Map<String, Employee> employeeMap = new HashMap<>();
 
-    @Override
-    public Employee add(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee add(String firstName, String lastName, int salary, String department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeMap.containsKey(employee.getFullName())) {
             throw new EmployeeAlreadyAddedException();
         }
@@ -22,27 +21,24 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employee;
     }
 
-    @Override
-    public Employee remove(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee remove(String firstName, String lastName, int salary, String department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeMap.containsKey(employee.getFullName())) {
             return employeeMap.remove(employee.getFullName());
         }
         throw new EmployeeNotFoundException();
     }
 
-    @Override
-    public Employee find(String firstName, String lastName) {
-        Employee employee = new Employee(firstName, lastName);
+    public Employee find(String firstName, String lastName, int salary, String department) {
+        Employee employee = new Employee(firstName, lastName, salary, department);
         if (employeeMap.containsKey(employee.getFullName())) {
             return employeeMap.get(employee.getFullName());
         }
         throw new EmployeeNotFoundException();
     }
 
-    @Override
-    public Collection<Employee> findAll() {
-        return Collections.unmodifiableCollection(employeeMap.values());
+    public List<Employee> findAll() {
+        return new ArrayList<>(employeeMap.values());
     }
 }
     
