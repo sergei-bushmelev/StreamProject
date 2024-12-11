@@ -5,32 +5,32 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sky.pro.Employee.model.Employee;
-import sky.pro.Employee.service.EmployeeService;
+import sky.pro.Employee.service.EmployeeServiceImpl;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/employee")
 public class EmployeeController {
-    private final EmployeeService service;
+    private final EmployeeServiceImpl service;
 
-    public EmployeeController(EmployeeService service) {
+    public EmployeeController(EmployeeServiceImpl service) {
         this.service = service;
     }
 
     @GetMapping("/add")
-    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return service.add(firstName, lastName);
+    public Employee addEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int salary, @RequestParam String department) {
+        return service.add(firstName, lastName, salary, department);
     }
 
     @GetMapping("/remove")
-    public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return service.remove(firstName, lastName);
+    public Employee removeEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int salary, @RequestParam String department) {
+        return service.remove(firstName, lastName, salary, department);
     }
 
     @GetMapping("/find")
-    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName) {
-        return service.find(firstName, lastName);
+    public Employee findEmployee(@RequestParam String firstName, @RequestParam String lastName, @RequestParam int salary, @RequestParam String department) {
+        return service.find(firstName, lastName, salary, department);
     }
 
     @GetMapping
